@@ -8,14 +8,14 @@ os_core = 'GBM_OS_core.txt'
 num_folds = 100
 
 # Development set.
-dev_file = 'GBM_dev_sample_list.txt'
-non_dev_file = 'GBM_non_dev_sample_list.txt'
+dev_file = 'GBM_dev_sample_list.txt.new'
+non_dev_file = 'GBM_non_dev_sample_list.txt.new'
 
 # 100-fold split training set within dev
-dev_train_file = 'GBM_dev_train_sample_list.txt'
+dev_train_file = 'GBM_dev_train_sample_list.txt.new'
 
 # 100-fold split test set within dev
-dev_test_file = 'GBM_dev_test_sample_list.txt'
+dev_valid_file = 'GBM_dev_valid_sample_list.txt.new'
 
 df = pd.read_csv(join(data_dir, os_core), sep='\t')
 sample_mat = df.feature.as_matrix()
@@ -37,11 +37,11 @@ for i in range(multi.shape[1]):
 num_samples_dev = multi.shape[0]
 num_samples_dev_train = int(num_samples_dev * 0.8)
 dev_train = multi[:num_samples_dev_train, :]
-dev_test = multi[num_samples_dev_train:, :]
+dev_valid = multi[num_samples_dev_train:, :]
 print 'num_samples_dev:', num_samples_dev, 'num_samples_dev_train:', \
-  num_samples_dev_train, 'num_samples_dev_test:', \
+  num_samples_dev_train, 'num_samples_dev_valid:', \
   num_samples_dev - num_samples_dev_train
 np.savetxt(join(data_dir, dev_train_file), dev_train, delimiter='\t', fmt='%s')
-np.savetxt(join(data_dir, dev_test_file), dev_test, delimiter='\t', fmt='%s')
+np.savetxt(join(data_dir, dev_valid_file), dev_valid, delimiter='\t', fmt='%s')
 print 'saved to', join(data_dir, dev_train_file)
-print 'saved to', join(data_dir, dev_test_file)
+print 'saved to', join(data_dir, dev_valid_file)
