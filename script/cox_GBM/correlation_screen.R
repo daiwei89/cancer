@@ -39,10 +39,10 @@ correlation.screen <- function(y.train,x.train, pvalue.cutoff=0.05, qvalue.cutof
     names(feature.col)=c()
     
     q.value <- p.adjust(feature.pvalue, method="fdr")
-    for (i in 1:10/10)
-      {
-        print(paste("qvalue <=", i, ":", length(which(q.value<=i))))
-      }
+    #for (i in 1:10/10)
+    #  {
+    #    print(paste("qvalue <=", i, ":", length(which(q.value<=i))))
+    #  }
     col.sig <- which( feature.pvalue < pvalue.cutoff) # & q.value < qvalue.cutoff  )
     print(paste("Significant records: p-value < 0.05:", length(col.sig)))  #and FDR <",qvalue.cutoff,":", length(col.sig)))
    
